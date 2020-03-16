@@ -1,0 +1,4 @@
+<view class="containerBox"><!-- 布局方式可以横向可纵向（在CSS设置） -->
+    <text>点击定位当前位置</text>
+    <text></text>
+</view>

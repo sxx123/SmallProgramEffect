@@ -1,0 +1,95 @@
+<!--index.wxml-->
+<view class="containerBox"><!-- 布局方式可以横向可纵向（在CSS设置） -->
+  <!-- 普通选项切换 -->
+  <view class="changList">
+    <view class="list" bindtap="listBtn" data-index="0">
+      <text>全部</text>
+      <image  src="{{a==0?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image> <!-- 图片可换 -->
+    </view>
+    <view class="list" bindtap="listBtn" data-index="1">
+      <text>已读</text>
+      <image  src="{{a==1?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image><!-- 图片可换 -->
+    </view>
+    <view class="list" bindtap="listBtn" data-index="2">
+      <text>未读</text>
+      <image src="{{a==2?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image><!-- 图片可换 -->
+    </view>
+  </view>
+  <!-- 普通选项切换带显示不同页面 (与上面关联)-->
+  <view class="pageA" wx:if="{{a==0}}"><!--表示如果a==0的时候 让全部页面显示-->
+    我是全部页面
+  </view>
+   <view class="pageB" wx:if="{{a==1}}">
+    我是已读页面
+  </view>
+   <view class="pageC" wx:if="{{a==2}}">
+    我是未读页面
+  </view>
+</view>
+
+
+<view class="containerBox"><!-- 布局方式可以横向可纵向（在CSS设置） -->
+  <!-- swiper带滑动效果选项切换 -->
+  <view class="changList">
+    <view class="list" bindtap="listBtnTwo" data-current="0"><!--data-(data-idx)idx属于自定义写法-->
+      <text>青菜</text>
+      <image  src="{{currImg==0?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image> <!-- 图片可换 -->
+    </view>
+    <view class="list" bindtap="listBtnTwo" data-current="1">
+      <text>萝卜</text>
+      <image  src="{{currImg==1?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image><!-- 图片可换 -->
+    </view>
+    <view class="list" bindtap="listBtnTwo" data-current="2">
+      <text>黄瓜</text>
+      <image src="{{currImg==2?'http://pics.jiuziran.com/Fix6Hex1SXRNU-3pLP3nis7OL5ci':''}}"></image><!-- 图片可换 -->
+    </view>
+  </view>
+  <!-- swiper带滑动效果选项切换带显示不同页面 (与上面关联)-->
+  <swiper current="{{currImg}}" duration="300" bindchange="bindchange"  class='swiper-d'> 
+      <swiper-item style="background-color: rgb(150, 127, 130);">
+        <text>我是青菜</text>
+      </swiper-item> 
+      <swiper-item style="background-color: rgb(37, 31, 32);">
+        <text>我是萝卜</text>
+      </swiper-item>  
+      <swiper-item style="background-color: rgb(157, 182, 19);">
+        <text>我是黄瓜</text>
+      </swiper-item>  
+  </swiper>
+</view>
+
+<!-- 筛选  同时可以多选 可以单选 -->
+<!-- 方式一 -->
+<view class="containerBox" style="margin-top:40rpx">
+  <view class='sxList'>
+     <text bindtap="chooseDspProp" data-index="0" class="{{list[0].ischecked?'sxListColor':'sxListdefault'}}">减免运费</text>
+     <text bindtap="chooseDspProp" data-index="1" class="{{list[1].ischecked?'sxListColor':'sxListdefault'}}">优惠券</text>
+  </view>
+</view>
+<!-- 方式二 -->
+<view class="containerBox" style="margin-top:40rpx">
+  <view class='sxList'>
+     <text wx:for="{{kindList}}" data-index="{{index}}" bindtap="changKind" class="{{kindList[index].checked?'sxListColor':'sxListdefault'}}">{{item.id}}{{item.name}}</text>
+  </view>
+</view>
+<!-- swiper轮播图点击图片可放大滑动 -->
+  <view class="banner" wx:if="{{bannerList.length>0}}">
+    <swiper style="height:300rpx" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}" bindchange="bindchange">
+      <block wx:for="{{bannerList}}" wx:key="index">
+        <swiper-item>
+          <image bindtap='previewImg' src="{{item.img}}" data-index="{{index}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="xNumber">
+      <text>{{currNumber}}/{{bannerList.length}}</text>
+    </view>
+  </view>
+
+  <!-- 定位 -->
+  <view class="containerBox" style="margin-top:40rpx"><!-- 布局方式可以横向可纵向（在CSS设置） -->
+    <text bindtap="addressBtn">点击定位当前位置:</text>
+    <text style="color:red">{{name}}</text>
+    <text bindtap="addressBtn">当前位置详情:</text>
+    <text style="color:blue">{{address}}</text>
+  </view>
